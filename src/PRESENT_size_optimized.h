@@ -1,5 +1,5 @@
-#ifndef PRESENT_small
-#define PRESENT_small
+#ifndef PRESENT
+#define PRESENT
 extern "C" void encrypt(void);
 extern "C" void decrypt(void);
 #endif
