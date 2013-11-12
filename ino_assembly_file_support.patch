@@ -1,0 +1,26 @@
+diff --git a/ino/make/Makefile.jinja b/ino/make/Makefile.jinja
+index afe8538..6dcc149 100644
+--- a/ino/make/Makefile.jinja
++++ b/ino/make/Makefile.jinja
+@@ -50,9 +50,20 @@ include {{ target.path|depsname }}
+ {{ compile_cpp(cpp) }}
+ 
+ {#
++ #   *.S -> *.o
++ #}
++{% set S = (e.src_dir|glob('*.S') + src_build_dir|glob('*.S'))|filemap(src_build_dir, e.names.obj) %}
++{% for source, target in S.items() %}
++{{ target.path }} : {{ source.path }}
++	@echo {{ (source.dirname|basename|pjoin(source.filename))|colorize('yellow') }}
++	@mkdir -p {{ target.path|dirname }}
++	{{v}}{{ e.cc ~ ' ' ~ e.cppflags ~ ' ' ~ e.cflags }} {{ iquote(source) }} -o $@ -c {{ source.path }}
++{% endfor %}
++
++{#
+  #   *.o -> elf
+  #}
+-{% set objs = c.target_paths() + cpp.target_paths() + libs.target_paths() %}
++{% set objs = c.target_paths() + cpp.target_paths() + libs.target_paths() + S.target_paths() %}
+ {% set elf = e.build_dir|pjoin('firmware.elf') %}
+ {{ elf }} : {{ objs }}
+ 	@echo {{ 'Linking firmware.elf'|colorize('green') }}
