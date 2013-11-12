@@ -2,8 +2,8 @@
 #define highByte(w) ((uint8_t) ((w) >> 8))
 #define lowByte(w) ((uint8_t) ((w) & 0xff))
 
-static unsigned char encryption[24], key[16] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-char print_buf[32];
+static unsigned char encryption[24], key[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+char print_buf[18];
 void setup() {
         Serial.begin(9600);
         Serial.println("PRESENT encrypter");
