@@ -7,9 +7,9 @@ static unsigned char encryption[24], key[10] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x
 char print_buf[18];
 void setup() {
         Serial.begin(9600);
-        Serial.println("PRESENT encrypter");
+        Serial.println("PRESENT-80 encrypter");
 	memset(encryption, 0x0, 8);
-	memcpy(encryption+8, key, 16);
+	memcpy(encryption+8, key, 10);
 	test_print();
 }
 
