@@ -25,13 +25,41 @@
 # THE SOFTWARE.
 
 .global encrypt
-#.global decrypt
 .set ENCRYPTION, 1
+#.global decrypt
 #.set DECRYPTION, 1
 .set RELOCATABLE_SBOXES, 1
+# Must align this section to a 256-byte address for this to work
+#.ifdef DECRYPTION
+#.set PACKED_SBOXES, 1
+#.endif
+#.ifdef PACKED_SBOXES
+#.set QUANTIZE_TIMING, 1
+#.endif
 ROUNDS = 31
+.ifdef PACKED_SBOXES
+.ifndef RELOCATABLE_SBOXES
+.org 256
+.endif
+SBOX:   .byte 0xc5,0x6b,0x90,0xad,0x3e,0xf8,0x47,0x12
+.ifdef DECRYPTION
+.ifndef RELOCATABLE_SBOXES
+.org 512
+.endif
+INVSBOX:.byte 0x5e,0xf8,0xc1,0x2d,0xb4,0x63,0x07,0x9a
+.endif
+.else
+.ifndef RELOCATABLE_SBOXES
+.org 256
+.endif
 SBOX:   .byte 0xc,0x5,0x6,0xb,0x9,0x0,0xa,0xd,0x3,0xe,0xf,0x8,0x4,0x7,0x1,0x2
+.ifdef DECRYPTION
+.ifndef RELOCATABLE_SBOXES
+.org 512
+.endif
 INVSBOX:.byte 0x5,0xe,0xf,0x8,0xc,0x1,0x2,0xd,0xb,0x4,0x6,0x3,0x0,0x7,0x9,0xa
+.endif
+.endif
 .macro schedule_key_macro
 inc r20
 ldi r24, 6
@@ -235,7 +263,7 @@ ret
 sBoxLayer:
 sBoxLayer_macro
 ret
-prepare:
+setup:
 setup_macro
 ret
 .endif
@@ -245,7 +273,7 @@ encrypt:
 .ifndef DECRYPTION
 setup_macro
 .else
-rcall prepare
+rcall setup
 .endif
 encrypt_update:
 rcall addRoundKey
@@ -271,7 +299,7 @@ decrypt:
 .ifndef ENCRYPTION
 setup_macro
 .else
-rcall prepare
+rcall setup
 .endif
 schedule_last_key:
 .ifndef ENCRYPTION
