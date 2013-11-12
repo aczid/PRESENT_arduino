@@ -1,5 +1,5 @@
-extern "C" void encrypt(void);
-//extern "C" void decrypt(void);
+extern "C" void encrypt();
+//extern "C" void decrypt();
 #define highByte(w) ((uint8_t) ((w) >> 8))
 #define lowByte(w) ((uint8_t) ((w) & 0xff))
 
@@ -13,7 +13,7 @@ void setup() {
 }
 
 // Manual prologue/epilog
-void do_encryption(void){
+void do_encryption(){
 		memcpy(encryption+8, key, 16);
 		asm("push r31");
 		asm("push r30");
@@ -84,7 +84,7 @@ void do_encryption(void){
 		asm("pop r31");
 }
 
-void test_print(void){
+void test_print(){
 		Serial.println("Plaintext:");
 		sprintf(print_buf, "%02x%02x%02x%02x %02x%02x%02x%02x", encryption[0], encryption[1], encryption[2], encryption[3], encryption[4], encryption[5], encryption[6], encryption[7]);
 		Serial.println(print_buf);
