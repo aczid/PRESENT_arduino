@@ -29,7 +29,7 @@
 #.global decrypt
 #.set DECRYPTION, 1
 .set RELOCATABLE_SBOXES, 1
-# Must align this section to a 256-byte address for this to work
+# Must align this section to 256 bytes for this to work
 #.ifdef DECRYPTION
 #.set PACKED_SBOXES, 1
 #.endif
