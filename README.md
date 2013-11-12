@@ -8,6 +8,14 @@ Ino requires a patch to support .S files, which is included, after which you can
     ino build
     ino upload
 
+Other ciphers on the Arduino
+============================
+
+If you want to play around with cryptography on your Arduino, you should know our PRESENT implementations are modelled after the [implementations of lightweight block ciphers](http://perso.uclouvain.be/fstandae/lightweight_ciphers/) done by researchers at the University of Louvain, and uses the same calling convention.
+You should be able to use any of their implementations after converting from Atmel to GNU syntax. (The [awfully lazy Atmel to GNU script](https://gist.github.com/aczid/7423399) I used here may help a bit.)
+
+**If you just need some cryptography recipe without getting into the details, you are probably better off with [NaCl](http://cryptojedi.org/crypto/).**
+
 Disclaimer
 ==========
 
