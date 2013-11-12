@@ -13,7 +13,7 @@ index afe8538..6dcc149 100644
 +{{ target.path }} : {{ source.path }}
 +	@echo {{ (source.dirname|basename|pjoin(source.filename))|colorize('yellow') }}
 +	@mkdir -p {{ target.path|dirname }}
-+	{{v}}{{ e.cc ~ ' ' ~ e.cppflags ~ ' ' ~ e.cflags }} {{ iquote(source) }} -o $@ -c {{ source.path }}
++	{{v}}{{ e.cc ~ ' ' ~ e.cppflags ~ ' ' ~ e.cflags }} -o $@ -c {{ source.path }}
 +{% endfor %}
 +
 +{#
