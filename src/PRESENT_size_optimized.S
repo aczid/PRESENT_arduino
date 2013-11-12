@@ -1,5 +1,5 @@
 .global encrypt
-.global decrypt
+#.global decrypt
 .set ENCRYPTION, 1
 .set DECRYPTION, 0
 .set RELOCATABLE_SBOXES, 1
