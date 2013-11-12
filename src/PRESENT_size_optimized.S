@@ -1,3 +1,9 @@
+# This version was mostly converted from Atmel to GNU syntax using a very ugly
+# one-off Python script (https://gist.github.com/aczid/7423399)
+# which also strips comments.
+# For the original version with comments and documentation see:
+# https://github.com/aczid/ru_crypto_engineering
+
 .global encrypt
 #.global decrypt
 .set ENCRYPTION, 1
