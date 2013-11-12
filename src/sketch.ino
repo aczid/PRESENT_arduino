@@ -9,12 +9,12 @@ void setup() {
         Serial.begin(9600);
         Serial.println("PRESENT encrypter");
 	memset(encryption, 0x0, 8);
+	memcpy(encryption+8, key, 16);
 	test_print();
 }
 
 // Manual prologue/epilog
 void do_encryption(){
-		memcpy(encryption+8, key, 16);
 		asm("push r31");
 		asm("push r30");
 		asm("push r29");
@@ -98,6 +98,7 @@ void test_print(){
 
 void loop() {
         while (Serial.available() > 0) {
+		memset(encryption, 0x0, 8);
 		Serial.readBytesUntil('\n', (char*) encryption, 8);
 		test_print();
         }
