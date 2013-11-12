@@ -1,4 +1,5 @@
-#include "PRESENT_size_optimized.h"
+extern "C" void encrypt(void);
+//extern "C" void decrypt(void);
 #define highByte(w) ((uint8_t) ((w) >> 8))
 #define lowByte(w) ((uint8_t) ((w) & 0xff))
 
