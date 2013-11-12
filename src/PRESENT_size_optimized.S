@@ -260,12 +260,15 @@ schedule_key_macro
 rcall schedule_key
 .endif
 brne schedule_last_key
-ldi r31, hi8(INVSBOX)
+ldi r31, hi8(pm(INVSBOX))
 .ifdef RELOCATABLE_SBOXES
 .ifdef PACKED_SBOXES
-ldi r23, lo8(INVSBOX<<2)
+ldi r23, lo8(pm(INVSBOX))
+lsl r23
+lsl r23
 .else
-ldi r23, lo8(INVSBOX)
+ldi r23, lo8(pm(INVSBOX))
+lsl r23
 .endif
 .endif
 decrypt_update:
