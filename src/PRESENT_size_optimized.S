@@ -49,21 +49,21 @@
 ; CONFIGURATION
 .global encrypt
 ;.global decrypt
-.set ENCRYPTION, 1          ; (can save 26 bytes if omitted)
-;.set DECRYPTION, 1         ; (can save 68 bytes if omitted)
-;.set FAST_ROTATE, 1        ; Fast rotation (adds 4 bytes, 4x speedup)
-;.set PRESENT_128, 1        ; Use 128-bit keys (adds 12 bytes if FAST_ROTATE set)
-;.set ZERO_KEY, 1           ; Zeroise key in SRAM (adds 2 bytes)
-.set RELOCATABLE_SBOXES, 1  ; This makes s-boxes relocatable in flash
-; otherwise they are mapped at 0x100 and 0x200
-; (adds 6 bytes)
+.set ENCRYPTION, 1         ; (can save 26 bytes if omitted)
+;.set DECRYPTION, 1        ; (can save 68 bytes if omitted)
+;.set FAST_ROTATE, 1       ; Fast rotation (adds 4 bytes, 4x speedup)
+;.set PRESENT_128, 1       ; Use 128-bit keys (adds 12 bytes if FAST_ROTATE set)
+;.set ZERO_KEY, 1          ; Zeroise key in SRAM (adds 2 bytes)
+.set RELOCATABLE_SBOXES, 1 ; This makes s-boxes relocatable in flash
+                           ; otherwise they are mapped at 0x100 and 0x200
+                           ; (adds 6 bytes)
 ; Must align this section to 256 bytes for this to work
 ;.ifdef DECRYPTION
-;.set PACKED_SBOXES, 1      ; Use packed s-boxes (saves 2 bytes)
+;.set PACKED_SBOXES, 1     ; Use packed s-boxes (saves 2 bytes)
 ;.endif
 ; !!! ATtiny45 specific! Disable packed s-boxes elsewhere unless verified! !!!
 ;.ifdef PACKED_SBOXES
-;.set QUANTIZE_TIMING, 1    ; Avoid timing attacks (adds 6 bytes)
+;.set QUANTIZE_TIMING, 1   ; Avoid timing attacks (adds 6 bytes)
 ;.endif
 
 ; Number of rounds
