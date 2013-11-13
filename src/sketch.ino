@@ -13,22 +13,10 @@ void setup() {
 	test_print();
 }
 
-// Manual prologue/epilog
 void do_encryption(){
-		asm("push r31");
-		asm("push r30");
+		// http://www.nongnu.org/avr-libc/user-manual/FAQ.html#faq_reg_usage
 		asm("push r29");
 		asm("push r28");
-		asm("push r27");
-		asm("push r26");
-		asm("push r25");
-		asm("push r24");
-		asm("push r23");
-		asm("push r22");
-		asm("push r21");
-		asm("push r20");
-		asm("push r19");
-		asm("push r18");
 		asm("push r17");
 		asm("push r16");
 		asm("push r15");
@@ -45,13 +33,10 @@ void do_encryption(){
 		asm("push r4");
 		asm("push r3");
 		asm("push r2");
-		asm("push r1");
-		asm("push r0");
 		asm("mov r26, %0":: "l" (lowByte((unsigned int)encryption)));
 		asm("mov r27, %0":: "l" (highByte((unsigned int)encryption)));
 		encrypt();
-		asm("pop r0");
-		asm("pop r1");
+		asm("clr r1");
 		asm("pop r2");
 		asm("pop r3");
 		asm("pop r4");
@@ -68,20 +53,8 @@ void do_encryption(){
 		asm("pop r15");
 		asm("pop r16");
 		asm("pop r17");
-		asm("pop r18");
-		asm("pop r19");
-		asm("pop r20");
-		asm("pop r21");
-		asm("pop r22");
-		asm("pop r23");
-		asm("pop r24");
-		asm("pop r25");
-		asm("pop r26");
-		asm("pop r27");
 		asm("pop r28");
 		asm("pop r29");
-		asm("pop r30");
-		asm("pop r31");
 }
 
 void test_print(){
