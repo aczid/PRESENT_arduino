@@ -6,8 +6,8 @@ extern "C" void encrypt();
 static unsigned char encryption[24], key[10] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 char print_buf[18];
 void setup() {
-        Serial.begin(9600);
-        Serial.println("PRESENT-80 encrypter");
+	Serial.begin(9600);
+	Serial.println("PRESENT-80 encrypter");
 	memset(encryption, 0x0, 8);
 	memcpy(encryption+8, key, 10);
 	test_print();
@@ -70,10 +70,10 @@ void test_print(){
 }
 
 void loop() {
-        while (Serial.available() > 0) {
+	while (Serial.available() > 0) {
 		memset(encryption, 0x0, 8);
 		Serial.readBytesUntil('\n', (char*) encryption, 8);
 		test_print();
-        }
+	}
 }
 
